@@ -3,18 +3,12 @@ import numpy as np
 from ultralytics import YOLO
 from ensemble_boxes import weighted_boxes_fusion
 
-# ===============================
-# LOAD MODELS
-# ===============================
 model1 = YOLO("model1_best.pt")
 model2 = YOLO("runs/detect/train2/weights/best.pt")
 
 CONF = 0.25
 IOU = 0.45
 
-# ===============================
-# ENSEMBLE PREDICTION FUNCTION
-# ===============================
 def ensemble_predict(img_path):
     img = cv2.imread(str(img_path))
     if img is None:
@@ -64,9 +58,10 @@ def ensemble_predict(img_path):
 
     return boxes, scores, labels
 if __name__ == "__main__":
-    test_img = r"C:\Users\woebe\College\shalini_hackathon\randomized_dataset\test\images\000019.jpg"   # <-- put an actual image path
+    test_img = r"C:\Users\woebe\College\shalini_hackathon\randomized_dataset\test\images\000019.jpg" 
     boxes, scores, labels = ensemble_predict(test_img)
 
     print("Boxes:", boxes)
     print("Scores:", scores)
     print("Labels:", labels)
+
