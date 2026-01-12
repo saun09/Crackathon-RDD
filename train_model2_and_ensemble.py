@@ -18,15 +18,9 @@ import multiprocessing
 
 def main():
 
-    # ============================================================
-    # GPU CLEANUP
-    # ============================================================
     torch.cuda.empty_cache()
     gc.collect()
 
-    # ============================================================
-    # PATHS
-    # ============================================================
     DATA_YAML = "./rdd2022.yaml"
     TEST_IMAGES = r"C:/Users/woebe/College/shalini_hackathon/randomized_dataset/test/images"
 """ 
@@ -66,19 +60,12 @@ def main():
         **TRAINING_CONFIG_2
     )
 
-    shutil.copy("runs/detect/train2/weights/best.pt", "model2_best.pt")
+    shutil.copy("runs/detect/train2/weights/best.pt")
     print("Model 2 saved as model2_best.pt") """
 
-    # ============================================================
-    # LOAD ENSEMBLE MODELS
-    # ============================================================
-   # print("\n===== LOADING MODELS =====")
     model1 = YOLO("model1_best.pt")
-    model2 = YOLO("model2_best.pt")
+    model2 = YOLO("best.pt")
 
-    # ============================================================
-    # ENSEMBLE FUNCTION
-    # ============================================================
     CONF = 0.25
     IOU = 0.45
 
@@ -166,3 +153,4 @@ def main():
 if __name__ == "__main__":
     multiprocessing.freeze_support()
     main()
+
