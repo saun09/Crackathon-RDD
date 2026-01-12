@@ -24,9 +24,6 @@ def main():
     DATA_YAML = "./rdd2022.yaml"
     TEST_IMAGES = r"C:/Users/woebe/College/shalini_hackathon/randomized_dataset/test/images"
 """ 
-    # ============================================================
-    # TRAIN MODEL 2
-    # ============================================================
     print("\n===== TRAINING MODEL 2 =====")
 
     TRAINING_CONFIG_2 = {
@@ -109,9 +106,6 @@ def main():
 
         return boxes, scores, labels
 
-    # ============================================================
-    # GENERATE TEST PREDICTIONS
-    # ============================================================
     print("\n===== GENERATING ENSEMBLE PREDICTIONS =====")
 
     pred_dir = Path("predictions")
@@ -138,19 +132,14 @@ def main():
         with open(pred_dir/f"{img.stem}.txt","w") as f:
             f.write("\n".join(lines))
 
-    # ============================================================
-    # CREATE SUBMISSION ZIP
-    # ============================================================
     shutil.make_archive("submission","zip","predictions")
     print("\nsubmission.zip created successfully!")
 
     print("\n===== PIPELINE COMPLETE =====")
 
 
-# ============================================================
-# WINDOWS MULTIPROCESSING FIX
-# ============================================================
 if __name__ == "__main__":
     multiprocessing.freeze_support()
     main()
+
 
